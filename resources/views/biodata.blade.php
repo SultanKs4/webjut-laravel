@@ -12,7 +12,7 @@
     <p>Nama : {{$nama}}</p>
     <ul>
         @foreach ($materi as $datamateri)
-            <li>{{ $data }}</li>
+        <li>{{ $datamateri }}</li>
         @endforeach
     </ul>
 </body>
