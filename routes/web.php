@@ -13,14 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'mahasiswa', 301);
 
-Route::get('hallo', function () {
-    return "Hallo, Anda sedang mencoba Routing di Laravel";
-});
+Route::get('mahasiswa', 'MahasiswaController@index')->name('mahasiswa');
 
-Route::get('profil', 'CobaController@profil');
+Route::get('mahasiswa/tambah', 'MahasiswaController@tambah');
 
-Route::get('biodata', 'BiodataController@index');
+Route::post('mahasiswa/simpan', 'MahasiswaController@simpan');
+
+Route::get('mahasiswa/detail/{id}', 'MahasiswaController@detail');
+
+Route::get('mahasiswa/edit/{id}', 'MahasiswaController@edit');
+
+Route::post('mahasiswa/update', 'MahasiswaController@update');
+
+Route::get('mahasiswa/hapus/{id}', 'MahasiswaController@hapus');
