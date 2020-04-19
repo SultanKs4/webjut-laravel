@@ -8,16 +8,14 @@
 <a href="/mahasiswa" class="btn btn-danger">Kembali</a>
 <br>
 <br>
-@foreach ($mahasiswa as $mhs)
-<h5 class="card-title">{{ $mhs->nama }}</h5>
+<h5 class="card-title">{{ $mahasiswa->nama }}</h5>
 <p class="card-text">
     <label for=""><b>NIM : </b></label>
-    {{ $mhs->nim }}</p>
+    {{ $mahasiswa->nim }}</p>
 <p class="card-text">
     <label for=""><b>E-mail : </b></label>
-    {{ $mhs->email }}</p>
+    {{ $mahasiswa->email }}</p>
 <p class="card-text">
     <label for=""><b>Jurusan : </b></label>
-    {{ $mhs->jurusan }}</p>
-@endforeach
+    {{ $mahasiswa->jurusan }}</p>
 @endsection

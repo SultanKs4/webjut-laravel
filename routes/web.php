@@ -25,6 +25,6 @@ Route::get('mahasiswa/detail/{id}', 'MahasiswaController@detail');
 
 Route::get('mahasiswa/edit/{id}', 'MahasiswaController@edit');
 
-Route::post('mahasiswa/update', 'MahasiswaController@update');
+Route::post('mahasiswa/update/{id}', 'MahasiswaController@update');
 
 Route::get('mahasiswa/hapus/{id}', 'MahasiswaController@hapus');

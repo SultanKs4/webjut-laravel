@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        //  Get data from table
-        $mahasiswa = DB::table('mahasiswa')->get();
-
-        // send data to view
+        $mahasiswa = Mahasiswa::all();
         return view('index', ['mahasiswa' => $mahasiswa]);
     }
 
@@ -23,7 +20,7 @@ class MahasiswaController extends Controller
 
     public function simpan(Request $request)
     {
-        DB::table('mahasiswa')->insert([
+        Mahasiswa::create([
             'nama' => $request->namamhs,
             'nim' => $request->nimmhs,
             'email' => $request->emailmhs,
@@ -35,31 +32,31 @@ class MahasiswaController extends Controller
 
     public function detail($id)
     {
-        $mahasiswa =  DB::table('mahasiswa')->where('id', $id)->get();
+        $mahasiswa = Mahasiswa::find($id);
         return view('detail', ['mahasiswa' => $mahasiswa]);
     }
 
     public function edit($id)
     {
-        $mahasiswa = DB::table('mahasiswa')->where('id', $id)->get();
+        $mahasiswa = Mahasiswa::find($id);
         return view('edit', ['mahasiswa' => $mahasiswa]);
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        DB::table('mahasiswa')->where('id', $request->id)->update([
-            'nama' => $request->namamhs,
-            'nim' => $request->nimmhs,
-            'email' => $request->emailmhs,
-            'jurusan' => $request->jurusanmhs,
-        ]);
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->nama = $request->namamhs;
+        $mahasiswa->nim = $request->nimmhs;
+        $mahasiswa->email = $request->emailmhs;
+        $mahasiswa->jurusan = $request->jurusanmhs;
+        $mahasiswa->save();
         return redirect()->route('mahasiswa');
     }
 
     public function hapus($id)
     {
-        DB::table('mahasiswa')->where('id', $id)->delete();
-
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->delete();
         return redirect()->route('mahasiswa');
     }
 }
