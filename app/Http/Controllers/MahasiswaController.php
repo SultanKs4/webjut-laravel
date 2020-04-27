@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Mahasiswa;
 
 class MahasiswaController extends Controller
@@ -25,14 +26,22 @@ class MahasiswaController extends Controller
 
     public function simpan(Request $request)
     {
-        Mahasiswa::create([
-            'nama' => $request->namamhs,
-            'nim' => $request->nimmhs,
-            'email' => $request->emailmhs,
-            'jurusan' => $request->jurusanmhs,
+
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|numeric',
+            'email' => 'required|email',
+            'jurusan' => 'required'
         ]);
 
-        return redirect()->route('mahasiswa');
+        DB::table('mahasiswa')->insert([
+            'nama' => $request->nama,
+            'nim' => $request->nim,
+            'email' => $request->email,
+            'jurusan' => $request->jurusan,
+        ]);
+
+        return view('simpan', ['data' => $request]);
     }
 
     public function detail($id)
